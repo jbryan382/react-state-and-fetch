@@ -59,6 +59,10 @@ export class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.handleNewGame
+  }
+
   render() {
     const header = 'Tic Tac Toe'
     return (
@@ -73,6 +77,7 @@ export class App extends Component {
               return (
                 <li
                   key={columnIndex}
+                  className={cell === ' ' ? '' : 'taken'}
                   onClick={() => this.handleClickCell(rowIndex, columnIndex)}
                 >
                   {cell}
