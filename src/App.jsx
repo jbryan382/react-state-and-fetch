@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
+import Gameboard from './components/Gameboard'
 
 export class App extends Component {
   state = {
+    id: null,
     board: [
       [' ', ' ', ' '],
       [' ', ' ', ' '],
       [' ', ' ', ' '],
     ],
-    id: null,
     winner: null,
   }
 
-  handleClickCell = async (row, column) => {
+  handleCellClick = async (row, column) => {
     if (
       // No game id
       this.state.id === undefined ||
@@ -70,22 +71,11 @@ export class App extends Component {
         <h1>
           {this.state.winner ? `${this.state.winner} is the winner` : header} -
           <button onClick={this.handleNewGame}>New</button>
+          <Gameboard
+            unicorn={this.state.board}
+            funcClick={this.handleCellClick}
+          />
         </h1>
-        <ul>
-          {this.state.board.map((boardRow, rowIndex) => {
-            return boardRow.map((cell, columnIndex) => {
-              return (
-                <li
-                  key={columnIndex}
-                  className={cell === ' ' ? '' : 'taken'}
-                  onClick={() => this.handleClickCell(rowIndex, columnIndex)}
-                >
-                  {cell}
-                </li>
-              )
-            })
-          })}
-        </ul>
       </div>
     )
   }
